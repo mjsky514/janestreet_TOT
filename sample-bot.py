@@ -2,7 +2,7 @@
 # ~~~~~==============   HOW TO RUN   ==============~~~~~
 # 1) Configure things in CONFIGURATION section
 # 2) Change permissions: chmod +x bot.py
-# 3) Run in loop: while true; do ./bot.py --test prod-like; sleep 1; done
+# 3) Run in loop: while true; do ./sample-bot.py --test prod-like; sleep 1; done
 
 import argparse
 from collections import deque
@@ -41,7 +41,7 @@ def main():
     # have already bought/sold symbols and have non-zero positions.
     hello_message = exchange.read_message()
     print("First message from exchange:", hello_message)
-    logging.info("First message from exchange:"+ hello_message)
+    logging.info("First message from exchange:"+str(hello_message))
 
     # Send an order for BOND at a good price, but it is low enough that it is
     # unlikely it will be traded against. Maybe there is a better price to
