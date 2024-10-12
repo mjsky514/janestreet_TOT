@@ -70,7 +70,7 @@ def main():
     order_id = 0
     asked_bonds=0
     bonds=0
-    def buy_bond(bot:ExchangeConnection,priceBid, priceAsk):
+    def buy_bond(priceBid, priceAsk, bot:ExchangeConnection):
         global order_id, asked_bonds, bonds
         order_id += 1
         if priceAsk < 1000 and asked_bonds < 100:
