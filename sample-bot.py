@@ -29,6 +29,7 @@ team_name = "TOT"
 # before it will start making good trades!
 
 def main():
+    global order_id, bonds, asked_bonds
     logging.basicConfig(filename="first.log", level=logging.INFO)
 
     args = parse_arguments()
@@ -70,7 +71,7 @@ def main():
     asked_bonds=0
     bonds=0
     def buy_bond(priceBid, priceAsk, bot:ExchangeConnection):
-        global order_id, bonds
+        global order_id, asked_bonds, bonds
         order_id += 1
         if priceAsk < 1000 and asked_bonds < 100:
             bot.send_add_message(order_id,"BOND","BUY", priceAsk, 100-asked_bonds)
@@ -78,6 +79,7 @@ def main():
         elif priceBid > 1000:
             bot.send_add_message(order_id,"BOND","SELL", priceBid,bonds)
     def update_bond(message):
+        global order_id, asked_bonds, bonds
         if message["dir"] == "BUY":
             bonds += message["size"]
         elif message["dir"] == "SELL":
@@ -127,7 +129,7 @@ def main():
                             "vale_ask_price": vale_ask_price,
                         }
                     )
-                    buy_bond(vale_bid_price, vale_ask_price)
+                    buy_bond(exchange, vale_bid_price, vale_ask_price)
 
 
 # ~~~~~============== PROVIDED CODE ==============~~~~~
